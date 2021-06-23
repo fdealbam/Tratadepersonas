@@ -392,10 +392,10 @@ body = html.Div([
             [
                 #html.H4("Consideraciones generales "),
                 html.P(
-                    "El Trata de personas es uno de los delitos más graves de la violencia de género que se vive en el país, "
+                    "La trata de personas es uno de los delitos más graves de la violencia de género que se vive en el país, "
                     "además, son problemas aún irresueltos y son tema central de la " 
                     "agenda legislativa, pero hoy alcanzan relevancia en la agenda seguridad pública del país, también. "
-                    "Este dashboard analítico se compone de una sección en la cual tratamos el trata de personas, observamos "
+                    "Este dashboard analítico se compone de una sección en la cual tratamos la trata de personas, observamos "
                     "su gravedad según intervalos anuales o mensuales; incluimos el análisis detallado de cuatro "
                     "entidades con más incidencias de este delito; finalmente, comparamos los rankings por entidad "
                     "según sumas del periódo 2015 al 2021 con las tasas por entidad del mismo intervalo. " 
@@ -712,8 +712,8 @@ body = html.Div([
                     "informar a las diputadas y diputados y público interesado sobre un tema "
                     "de vital importancia en la vida política. "
                     "La metodología que hemos empleado para analizar los datos la detallamos enseguida. "
-                    "Como se indica en cada caso, la información sobre el delito trata de personas "
-                    "Ejecutivo Nacional del Sistema Nacional de Seguridad Pública (SENSNSP) (2015-2021); "
+                    "Como se indica en cada caso, la información sobre el delito trata de personas proviene del "
+                    "Secretariado Ejecutivo Nacional del Sistema Nacional de Seguridad Pública (SENSNSP) (2015-2021); "
                     " "
                     "Este dashboard seguramente será completado progresivamente con otras fuentes de información "
                     "tanto gubernamental, como aquella proveniente de organizaciones civiles que " 
