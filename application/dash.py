@@ -30,7 +30,7 @@ d2 = today.strftime("Fecha de actualización : %d-%m-%Y")
 tabla1 = pd.read_csv('https://raw.githubusercontent.com/fdealbam/violenciadegenero/main/Tabla1.csv')              
 tabla1_f = tabla1[tabla1['Tipo de delito']== 'Trata de personas' ]
 tabla1_f.reset_index(inplace=True,)
-TOTTRATAPERSONAS = tabla1_f.iloc[0]['GRAND TOTAL']
+#TOTTRATAPERSONAS = tabla1_f.iloc[0]['GRAND TOTAL']
 #TASATRATAPERSONAS = tabla1_f.iloc[0]['tasa_acumulada']
 
 ###############################
@@ -280,9 +280,9 @@ fem15_21 = femi15_21[['Entidad', 'Total2015', 'Total2016', 'Total2017',
 junto15_21 = fem15_21.merge(junto1,right_on='NOM_ENT',left_on='Entidad')
 junto15_21["Entidad"].replace('Veracruz de Ignacio de la Llave','Veracruz' , inplace=True)
 #columna nueva 'Totfem1522' 
-junto15_21['Totfem1522']=junto15_21[['Total2015', 'Total2016', 'Total2017','Total2018', 'Total2019', 'Total2020', 'Total2021','Total2022']].sum(1)
-junto15_21['Totfem1521']=junto15_21[['Total2021']].sum(1)
-junto15_21['Totpob1521']=junto15_21[['POB21']].sum(1)
+#junto15_21['Totfem1522']=junto15_21[['Total2015', 'Total2016', 'Total2017','Total2018', 'Total2019', 'Total2020', 'Total2021','Total2022']].sum(1)
+junto15_21['Totfem1521']=junto15_21[[ 'Total2015', 'Total2016', 'Total2017','Total2018', 'Total2019', 'Total2020', 'Total2021']].sum(1)
+junto15_21['Totpob1521']=junto15_21[['POB15', 'POB16', 'POB17', 'POB18','POB19', 'POB20', 'POB21']].sum(1)
 junto15_21['Tasa1521']=((junto15_21.Totfem1521/junto15_21.Totpob1521)*100000).round(2)
 
 
@@ -300,10 +300,10 @@ graf_tasafem.update_layout(
     plot_bgcolor='rgba(0,0,0,0)',
     xaxis_tickangle=-45,
     template = 'simple_white',
-    #title='Tasa feminicidio periodo 2015-2020',
+    #"title='Tasa feminicidio periodo 2015-2020',
     xaxis_tickfont_size= 12,
     yaxis=dict(
-        title='Tasa cada 100000/hab',
+        title='Totales acumulados por entidad',
         titlefont_size=14,
         tickfont_size=12,
         titlefont_family= "Monserrat"),
@@ -315,10 +315,10 @@ graf_tasafem.update_layout(
 
 ######################################################### Grafica de Totales por entidad 
 
-TasasTot15_21index=junto15_21[['Entidad','Totfem1522']].sort_values('Totfem1522',ascending=False)
+TasasTot15_21index=junto15_21[['Entidad','Totfem1521']].sort_values('Totfem1521',ascending=False)
 
 graf_totfem = go.Figure()
-graf_totfem.add_trace(go.Bar(x=TasasTot15_21index['Entidad'],y=TasasTot15_21index['Totfem1522'],
+graf_totfem.add_trace(go.Bar(x=TasasTot15_21index['Entidad'],y=TasasTot15_21index['Totfem1521'],
                 marker_color='indianred'  # cambiar nuemeritos de rgb
                 ))
 
@@ -330,7 +330,7 @@ graf_totfem.update_layout(
     #title='Tasa feminicidio periodo 2015-2020',
     xaxis_tickfont_size= 12,
     yaxis=dict(
-        title='Totales acumulados por entidad',
+        title='Tasa cada 100 000 habitantes',
         titlefont_size=14,
         tickfont_size=12,
         titlefont_family= "Monserrat"),
@@ -342,20 +342,19 @@ graf_totfem.update_layout(
 
 delito = delitos.copy()
 delito.replace(np.nan,0, inplace=True)
-delito.groupby(['Entidad','Municipio','Cve. Municipio'])['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 
-                                        'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre',
+delito.groupby(['Entidad','Municipio','Cve. Municipio'])['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre',
                                         'Diciembre'].sum().to_csv('0agrup.csv')
 delitoso = pd.read_csv('0agrup.csv')
+delitoso['Grand total'] = delitoso[['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre']].sum(1)
+TOTTRATAPERSONAS = delitoso['Grand total'].sum()
+pobtot = junto15_21['Totpob1521'].sum()
+TASATRATAPERSONAS = round((TOTTRATAPERSONAS/pobtot)*100000,0)
+
 delCiu = delitoso[delitoso.Entidad == 'Ciudad de México']
 delMex = delitoso[delitoso.Entidad == 'México']
 delChi = delitoso[delitoso.Entidad == 'Chiapas']
 delPue = delitoso[delitoso.Entidad == 'Puebla']
 
-
-delCiu['Grand total'] = delCiu[['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre']].sum(1)
-delMex['Grand total'] = delMex[['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre']].sum(1)
-delChi['Grand total'] = delChi[['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre']].sum(1)
-delPue['Grand total'] = delPue[['Enero', 'Febrero', 'Marzo','Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre','Noviembre', 'Diciembre']].sum(1)
 
 delCiu2 = delCiu.sort_values('Grand total', ascending=False, ignore_index=True)
 delMex2 = delMex.sort_values('Grand total', ascending=False, ignore_index=True)
@@ -522,8 +521,8 @@ body = html.Div([
                     "La trata de personas es uno de los delitos más graves de la violencia de género que se vive en el país, "
                     "además, son problemas aún irresueltos y son tema central de la " 
                     "agenda legislativa, pero hoy alcanzan relevancia en la agenda seguridad pública del país, también. "+
-                   #" Entre 2015 y 2021 se registraron "+ str(f"{int(TOTTRATAPERSONAS):,}") +" casos, lo que representa una tasa de "+
-       #str(TASATRATAPERSONAS) +" delitos por cada 100 mil habitantes. "+
+                   " Entre 2015 y 2022 se registraron "+ str(f"{int(TOTTRATAPERSONAS):,}") +" casos, lo que representa una tasa de "+
+       str(TASATRATAPERSONAS) +" delitos por cada 100 mil habitantes. "+
                   
                     "Este tablero analítico se compone de una sección en la cual tratamos la trata de personas, observamos "
                     "su gravedad según intervalos anuales o mensuales; incluimos el análisis detallado de cuatro "
@@ -787,10 +786,10 @@ body = html.Div([
     
     dbc.Row(
            [
-               dbc.Col(html.H4("Total acumulado por entidad (2015-2022)"),
+               dbc.Col(html.H4("Total acumulado por entidad"),
                         width=2,lg={'size': 4,  "offset": 1, }),
 
-               dbc.Col(html.H4("Tasa por entidad (2021)"),
+               dbc.Col(html.H4("Tasa por entidad"),
                        width=1, lg={'size': 3,  "offset": 4, }),                     #size=12
                
             ], justify="end",),
