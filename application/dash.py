@@ -526,8 +526,8 @@ body = html.Div([
                   
                     "Este tablero analítico se compone de una sección en la cual tratamos la trata de personas, observamos "
                     "su gravedad según intervalos anuales o mensuales; incluimos el análisis detallado de cuatro "
-                    "entidades con más incidencias de este delito."#"; finalmente, comparamos los rankings por entidad "
-                    #"según sumas del periódo 2015 al 2021 con las tasas por entidad del mismo intervalo. " 
+                    "entidades con más incidencias de este delito.""; finalmente, comparamos los rankings por entidad "
+                    "según sumas del periódo 2015 al 2021 con las tasas por entidad del mismo intervalo. " 
                     " "                    
                     "Hoy existen cada vez mayor atención institucional para atender la violencia contra las mujeres y son fuerte "
                     "preocupación de la sociedad, esto último se evidencia en el hecho que todos seamos más vigilantes al respecto. "
@@ -629,6 +629,15 @@ body = html.Div([
                dbc.Col(dbc.Button(([html.H5("2021", style={"font-size": 18,"color": "black","background-color": "white"}),
                                     html.H1([str(f"{conf_2021:,d}")],style={"font-size": 40, "color": "black","background-color": "white"}),
                                     dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa%20tratadepersonas%20Total2021.png?raw=true",
+                                                 style={"background-color":"white"}),
+               ]), style={"background-color":"white",
+                         "box-shadow": "10px 20px 30px black",
+                         
+                        'width': '200px'
+                         }, disabled=True)),
+               dbc.Col(dbc.Button(([html.H5("2022", style={"font-size": 18,"color": "black","background-color": "white"}),
+                                    html.H1([str(f"{conf_2022:,d}")],style={"font-size": 40, "color": "black","background-color": "white"}),
+                                    dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa%20tratadepersonas%20Total2022.png?raw=true",
                                                  style={"background-color":"white"}),
                ]), style={"background-color":"white",
                          "box-shadow": "10px 20px 30px black",
@@ -899,4 +908,3 @@ app.layout = html.Div([body],
 
 if __name__ == "__main__":
     app.run_server()
-
