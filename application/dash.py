@@ -350,10 +350,21 @@ TOTTRATAPERSONAS = delitoso['Grand total'].sum()
 pobtot = junto15_21['Totpob1521'].sum()
 TASATRATAPERSONAS = round((TOTTRATAPERSONAS/pobtot)*100000,0)
 
-delCiu = delitoso[delitoso.Entidad == 'Ciudad de México']
-delMex = delitoso[delitoso.Entidad == 'México']
-delChi = delitoso[delitoso.Entidad == 'Chiapas']
-delPue = delitoso[delitoso.Entidad == 'Puebla']
+otrooso = delitoso.copy()
+otrooso.groupby(['Entidad'])['Grand total'].sum().to_csv('0agrup2.csv')
+enorden = pd.read_csv('0agrup2.csv')
+enorden2 = enorden.sort_values('Grand total', ascending=False, ignore_index=True)
+
+edoname1 = enorden2.iloc[0]['Entidad']
+edoname2 = enorden2.iloc[1]['Entidad']
+edoname3 = enorden2.iloc[2]['Entidad']
+edoname4 = enorden2.iloc[3]['Entidad']
+
+
+delCiu = delitoso[delitoso.Entidad == edoname1 ]
+delMex = delitoso[delitoso.Entidad == edoname2 ]
+delChi = delitoso[delitoso.Entidad == edoname3 ]
+delPue = delitoso[delitoso.Entidad == edoname4 ]
 
 
 delCiu2 = delCiu.sort_values('Grand total', ascending=False, ignore_index=True)
@@ -410,9 +421,9 @@ n4edo3 = delChi2.iloc[3]['Municipio']
 n5edo3 = delChi2.iloc[4]['Municipio']
 n6edo3 = delChi2.iloc[5]['Municipio']
 n7edo3 = delChi2.iloc[6]['Municipio']
-n8edo3 = delChi2.iloc[7]['Municipio']
-n9edo3 = delChi2.iloc[8]['Municipio']
-n10edo3 = delChi2.iloc[9]['Municipio']
+#n8edo3 = delChi2.iloc[7]['Municipio']
+#n9edo3 = delChi2.iloc[8]['Municipio']
+#n10edo3 = delChi2.iloc[9]['Municipio']
 v1edo3 = int(delChi2.iloc[0]['Grand total'])
 v2edo3 = int(delChi2.iloc[1]['Grand total'])
 v3edo3 = int(delChi2.iloc[2]['Grand total'])
@@ -420,9 +431,9 @@ v4edo3 = int(delChi2.iloc[3]['Grand total'])
 v5edo3 = int(delChi2.iloc[4]['Grand total'])
 v6edo3 = int(delChi2.iloc[5]['Grand total'])
 v7edo3 = int(delChi2.iloc[6]['Grand total'])
-v8edo3 = int(delChi2.iloc[7]['Grand total'])
-v9edo3 = int(delChi2.iloc[8]['Grand total'])
-v10edo3 =int( delChi2.iloc[9]['Grand total'])
+#v8edo3 = int(delChi2.iloc[7]['Grand total'])
+#v9edo3 = int(delChi2.iloc[8]['Grand total'])
+#v10edo3 =int( delChi2.iloc[9]['Grand total'])
 
 n1edo4 = delPue2.iloc[0]['Municipio']
 n2edo4 = delPue2.iloc[1]['Municipio']
@@ -431,9 +442,9 @@ n4edo4 = delPue2.iloc[3]['Municipio']
 n5edo4 = delPue2.iloc[4]['Municipio']
 n6edo4 = delPue2.iloc[5]['Municipio']
 n7edo4 = delPue2.iloc[6]['Municipio']
-n8edo4 = delPue2.iloc[7]['Municipio']
-n9edo4 = delPue2.iloc[8]['Municipio']
-n10edo4 = delPue2.iloc[9]['Municipio']
+#n8edo4 = delPue2.iloc[7]['Municipio']
+#n9edo4 = delPue2.iloc[8]['Municipio']
+#n10edo4 = delPue2.iloc[9]['Municipio']
 v1edo4 = int(delPue2.iloc[0]['Grand total'])
 v2edo4 = int(delPue2.iloc[1]['Grand total'])
 v3edo4 = int(delPue2.iloc[2]['Grand total'])
@@ -441,9 +452,9 @@ v4edo4 = int(delPue2.iloc[3]['Grand total'])
 v5edo4 = int(delPue2.iloc[4]['Grand total'])
 v6edo4 = int(delPue2.iloc[5]['Grand total'])
 v7edo4 = int(delPue2.iloc[6]['Grand total'])
-v8edo4 = int(delPue2.iloc[7]['Grand total'])
-v9edo4 = int(delPue2.iloc[8]['Grand total'])
-v10edo4 =int( delPue2.iloc[9]['Grand total'])
+#v8edo4 = int(delPue2.iloc[7]['Grand total'])
+#v9edo4 = int(delPue2.iloc[8]['Grand total'])
+#v10edo4 =int( delPue2.iloc[9]['Grand total'])
 
 bulletedo1 = ("Las 10 alcaldías con más trata de personas fueron: "+str(n1edo1)  +" ("+ str(v1edo1)+"), "+str(n2edo1) +" ("+ str(v2edo1)+"), "+str(n3edo1) +" ("+ str(v3edo1)+"), "+str(n4edo1) +" ("+ str(v4edo1)+"), "+str(n5edo1) +" ("+ str(v5edo1)+"), "+str(n6edo1) +" ("+ str(v6edo1)+"), "+str(n7edo1) +" ("+ str(v7edo1)+"), "+str(n8edo1) +" ("+ str(v8edo1)+"), "+str(n9edo1) +" ("+ str(v9edo1) +") y "+str(n10edo1)+" ("+ str(v10edo1)+").")
 bulletedo2 = ("Los 10 municipios con más trata de personas fueron: "+str(n1edo2) +" ("+ str(v1edo2)+"), "+str(n2edo2) +" ("+ str(v2edo2)+"), "+str(n3edo2) +" ("+ str(v3edo2)+"), "+str(n4edo2) +" ("+ str(v4edo2)+"), "+str(n5edo2) +" ("+ str(v5edo2)+"), "+str(n6edo2) +" ("+ str(v6edo2)+"), "+str(n7edo2) +" ("+ str(v7edo2)+"), "+str(n8edo2) +" ("+ str(v8edo2)+"), "+str(n9edo2) +" ("+ str(v9edo2)+") y "+str(n10edo2) +" ("+ str(v10edo2)+").")
@@ -703,8 +714,8 @@ body = html.Div([
     
      dbc.Row(
            [
-               dbc.Col(dbc.Button(([html.P("Ciudad de México", style={"font-size": 30,"color": "black","background-color": "white"}),
-                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/cdmx.jpeg?raw=true",
+               dbc.Col(dbc.Button(([html.P(edoname1, style={"font-size": 30,"color": "black","background-color": "white"}),
+                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa México.png?raw=true",
                   style={'size': 2,}),
                           html.P(bulletedo1,
                      style={'font-size': 14, "font-family":"Arial", "text-align":"justify" }),
@@ -715,8 +726,8 @@ body = html.Div([
                          
                          }, disabled=True)),
                
-               dbc.Col(dbc.Button(([html.P("México", style={"font-size": 30,"color": "black","background-color": "white"}),
-                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/mx.jpeg?raw=true",
+               dbc.Col(dbc.Button(([html.P(edoname2, style={"font-size": 30,"color": "black","background-color": "white"}),
+                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa Ciudad de México.png?raw=true",
                                     style={'size': 2,}),
                        html.P(bulletedo2,
                               style={'font-size': 14, "font-family":"Arial", "text-align":"justify" }),
@@ -734,8 +745,8 @@ body = html.Div([
     html.Br(),
     
                 dbc.Row([
-          dbc.Col(dbc.Button(([html.P("Chiapas", style={"font-size": 30,"color": "black","background-color": "white"}),
-                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/ch.jpeg?raw=true"),
+          dbc.Col(dbc.Button(([html.P(edoname3, style={"font-size": 30,"color": "black","background-color": "white"}),
+                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa Chiapas.png?raw=true"),
     
                        html.P(bulletedo3,
                            style={'font-size': 14, "font-family":"Arial", "text-align":"justify" }),
@@ -746,8 +757,8 @@ body = html.Div([
                          
                          }, disabled=True)),
                        
-               dbc.Col(dbc.Button(([html.P("Puebla", style={"font-size": 30,"color": "black","background-color": "white"}),
-                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/pue.jpeg?raw=true"),
+               dbc.Col(dbc.Button(([html.P(edoname4, style={"font-size": 30,"color": "black","background-color": "white"}),
+                       dbc.CardImg(src="https://github.com/fdealbam/Tratadepersonas/blob/main/application/static/Mapa Baja California.png?raw=true"),
                      html.Br(),
                                      html.Br(),
                                      html.Br(),
